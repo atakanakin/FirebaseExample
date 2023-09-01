@@ -2,7 +2,6 @@ package com.atakan.firebaseexample.presentation.main
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,7 +9,6 @@ import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.consumeWindowInsets
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -32,14 +30,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
+import com.atakan.firebaseexample.presentation.character.Character
 import com.atakan.firebaseexample.presentation.character.CharacterViewModel
+import com.atakan.firebaseexample.presentation.character.CharactersScreen
 import com.atakan.firebaseexample.presentation.sign_in.UserData
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class,
-    ExperimentalGlideComposeApi::class
-)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class,)
 @Composable
 fun MainScreen(
     userData: UserData?,
@@ -65,7 +62,6 @@ fun MainScreen(
                         )
                         Spacer(modifier = Modifier.weight(1f))
                         if (userData?.profilePictureUrl != null) {
-                            println("its not null")
                             AsyncImage(
                                 model = userData.profilePictureUrl,
                                 contentDescription = "Profile picture",
@@ -79,7 +75,6 @@ fun MainScreen(
                                     )
                             )
                         } else {
-                            println("its null")
                             Box(
                                 modifier = Modifier
                                     .size(50.dp)
@@ -99,31 +94,23 @@ fun MainScreen(
         },
         content = {innerPadding ->
             Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.Top,
                 modifier = Modifier
                     .consumeWindowInsets(innerPadding)
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .padding(20.dp),
             ) {
                 if(state.error.isBlank()){
                     if(state.isLoading){
-                        CircularProgressIndicator()
+                        CircularProgressIndicator(modifier = Modifier.align(CenterHorizontally))
                     }
                     else{
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .fillMaxHeight(0.7f)
-                        ) {
-                            Text(
-                                text = state.character.name
-                            )
-                            GlideImage(
-                                model = state.character.image,
-                                contentDescription = "character_image"
-                            )
+                        println(state.character.size)
 
-                        }
+                        CharactersScreen(characterList = state.character)
+
                     }
                 }
                 else{

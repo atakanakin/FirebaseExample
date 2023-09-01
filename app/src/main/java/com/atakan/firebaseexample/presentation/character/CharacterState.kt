@@ -5,6 +5,6 @@ import com.atakan.firebaseexample.domain.model.Origin
 
 data class CharacterState (
     val isLoading: Boolean = false,
-    val character: Character = Character("", "", "", "" , Origin("", ""), Origin("", ""), "", ""),
+    val character: List<Character> = emptyList(),
     val error: String = ""
 )

@@ -28,7 +28,7 @@ class CharacterViewModel @Inject constructor(
         getCharacterUseCase().onEach{result ->
             when(result){
                 is Resource.Success -> {
-                    _state.value = CharacterState(character = result.data ?: Character("", "", "", "" , Origin("", ""), Origin("", ""), "", ""))
+                    _state.value = CharacterState(character = result.data ?: emptyList())
                 }
                 is Resource.Error -> {
                     _state.value = CharacterState(

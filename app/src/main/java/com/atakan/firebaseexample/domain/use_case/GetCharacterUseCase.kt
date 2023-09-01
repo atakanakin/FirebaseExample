@@ -13,7 +13,7 @@ import javax.inject.Inject
 class GetCharacterUseCase @Inject constructor(
     private val repository: CharacterRepository
 ){
-    operator fun invoke(): Flow<Resource<Character>> = flow{
+    operator fun invoke(): Flow<Resource<List<Character>>> = flow{
         try {
             emit(Resource.Loading())
             val character = repository.getCharacterInfo().toCharacter()
