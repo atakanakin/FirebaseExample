@@ -1,10 +1,10 @@
 package com.atakan.firebaseexample.data.remote
 
 import com.atakan.firebaseexample.common.Constants.ENDPOINT
-import com.atakan.firebaseexample.data.remote.dto.RickDto
+import com.atakan.firebaseexample.data.remote.dto.CharacterDto
 import retrofit2.http.GET
 
-interface RickApi {
+interface CharacterApi {
     @GET(ENDPOINT)
-    suspend fun getRickInfo(): RickDto
+    suspend fun getCharacterInfo(): CharacterDto
 }

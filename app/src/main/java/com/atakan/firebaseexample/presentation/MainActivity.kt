@@ -26,8 +26,10 @@ import com.atakan.firebaseexample.presentation.sign_in.GoogleAuthUIClient
 import com.atakan.firebaseexample.presentation.sign_in.SignInViewModel
 import com.atakan.firebaseexample.ui.theme.FirebaseExampleTheme
 import com.google.android.gms.auth.api.identity.Identity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val googleAuthUIClient by lazy {
